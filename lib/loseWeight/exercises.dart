@@ -182,9 +182,7 @@ Start with 30-second sets or do 10 to 12 repetitions on each side. If you’re a
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 10),
           children: [
-            Image.asset(
-              assetsGif[widget.index],
-            ),
+            Image.asset(assetsGif[widget.index]),
             Text(
               heading[widget.index],
               style: TextStyle(
