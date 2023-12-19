@@ -88,32 +88,34 @@ class _MuscleState extends State<Muscle> {
 
   void _biceps() {
     showFlexibleBottomSheet(
-        minHeight: 0,
-        maxHeight: 1,
-        initHeight: 0.5,
-        context: context,
-        builder: (
-          BuildContext context,
-          ScrollController scrollController,
-          double bottomSheetOffset,
-        ) {
-          return SafeArea(
-            child: Material(
-                borderRadius: BorderRadius.circular(10),
-                child: SingleChildScrollView(
-                    child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                            """ 1. Barbell Cheat Curls:                                                       """,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        Image.asset('assets/muscle11.jpg'),
-                        Text("""Execution
+      minHeight: 0,
+      initHeight: 0.5,
+      maxHeight: 1,
+      anchors: [0, 0.5, 1],
+      isSafeArea: true,
+      context: context,
+      builder: (
+        BuildContext context,
+        ScrollController scrollController,
+        double bottomSheetOffset,
+      ) {
+        return SafeArea(
+          child: Material(
+              borderRadius: BorderRadius.circular(10),
+              child: SingleChildScrollView(
+                  child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          """ 1. Barbell Cheat Curls:                                                       """,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                      Image.asset('assets/muscle11.jpg'),
+                      Text("""Execution
 
 Choose a weight that’s a slightly heavier than you’d typically use in a barbell curl.
 Stand with your feet just wider than hip-width apart, back straight and core engaged.
@@ -128,13 +130,13 @@ Sets: 3
 Reps: To failure
 
 """),
-                        Text(
-                            """ 2. Weighted Chin-ups:                                                       """,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        Image.asset('assets/muscle13.jpg'),
-                        Text("""Execution
+                      Text(
+                          """ 2. Weighted Chin-ups:                                                       """,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                      Image.asset('assets/muscle13.jpg'),
+                      Text("""Execution
 
 Attach your chosen weight around your waist. 
 Hold onto the chin-up bar, with your palms facing towards you. Keep your body as straight as you can, with your core engaged.
@@ -150,13 +152,13 @@ Reps: To failure
 
 
 """),
-                        Text(
-                            """ 3. Banded Dumbbell Curls:                                                       """,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        Image.asset('assets/muscle14.jpg'),
-                        Text("""Execution
+                      Text(
+                          """ 3. Banded Dumbbell Curls:                                                       """,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                      Image.asset('assets/muscle14.jpg'),
+                      Text("""Execution
 
 Set yourself up with your resistance band. Hook the bottom of the band under your feet, toes pointing straight out in front.
 Hold the barbells, as well as the resistance band in both hands. 
@@ -171,13 +173,13 @@ Sets: 3
 Reps: To failure
 
 """),
-                        Text(
-                            """ 4. Dumbbell Incline Curls:                                                       """,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        Image.asset('assets/muscle15.jpg'),
-                        Text("""Execution
+                      Text(
+                          """ 4. Dumbbell Incline Curls:                                                       """,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                      Image.asset('assets/muscle15.jpg'),
+                      Text("""Execution
 
 Sit on your reclined seat, with the back reclined between 50 and 60 degrees. 
 Hold your dumbbells by your sides, with your arms fully extended. Your hands should be sitting slightly behind your body. 
@@ -192,13 +194,13 @@ Reps: To failure
 
 
 """),
-                        Text(
-                            """ 5. Dumbbell Curl Trifecta:                                                       """,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        Image.asset('assets/muscle16.jpg'),
-                        Text("""Execution
+                      Text(
+                          """ 5. Dumbbell Curl Trifecta:                                                       """,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                      Image.asset('assets/muscle16.jpg'),
+                      Text("""Execution
 
 Stand with your feet just wider than hip-width apart, body straight, core engaged.
 Start with your hands down by your sides. 
@@ -219,11 +221,11 @@ Reps: 8, in each position on each arm
 
 
 """),
-                      ]),
-                ))),
-          );
-        },
-        anchors: [0, 0.5, 1]);
+                    ]),
+              ))),
+        );
+      },
+    );
   }
 
   void _back() {

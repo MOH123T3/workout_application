@@ -4,7 +4,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:gym_project/home/backlayer_screen.dart';
 import 'package:gym_project/loseWeight/weight_loss.dart';
-import 'package:gym_project/muscles/bottom_sheet.dart';
+import 'package:gym_project/muscles/muscle_workout_screen.dart';
 import 'package:gym_project/strectching/stretchworkout.dart';
 import 'package:gym_project/yoga/yogaworkout.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
+        extendBodyBehindAppBar: false,
         appBar: BackdropAppBar(backgroundColor: Colors.cyan),
         backLayer: BackLayer(),
         frontLayer: SingleChildScrollView(
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: AnimationConfiguration.toStaggeredList(
                       duration: const Duration(seconds: 3),
                       childAnimationBuilder: (widget) => SlideAnimation(
-                          horizontalOffset: 130.0,
+                          horizontalOffset: 30.0,
                           child: FadeInAnimation(
                             child: widget,
                           )),
@@ -75,9 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image(
                                   image: AssetImage('assets/treadmill.png')),
                             ),
-                            SizedBox(
-                              width: 25.w,
-                            ),
                             Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -93,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'LOSE WEIGHT',
                                     style: TextStyle(
-                                        fontSize: 20.sp,
+                                        fontSize: 18.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -119,14 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'STRETCHING',
                                     style: TextStyle(
-                                        fontSize: 20.sp,
+                                        fontSize: 18.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 )),
-                            SizedBox(
-                              width: 25.w,
-                            ),
                             Container(
                               height: 20.h,
                               width: 30.w,
@@ -152,9 +147,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Image(
                                   image: AssetImage('assets/meditation.png')),
                             ),
-                            SizedBox(
-                              width: 25.w,
-                            ),
                             Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -169,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'YOGA',
                                     style: TextStyle(
-                                        fontSize: 20.sp,
+                                        fontSize: 18.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -195,14 +187,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'MUSCLES',
                                     style: TextStyle(
-                                        fontSize: 20.sp,
+                                        fontSize: 18.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 )),
-                            SizedBox(
-                              width: 25.w,
-                            ),
                             Container(
                               height: 20.h,
                               width: 30.w,

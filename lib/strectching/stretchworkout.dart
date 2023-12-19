@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 
 class Stretching extends StatefulWidget {
   const Stretching({super.key});
@@ -111,45 +112,46 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
       body: Column(
         children: [
           Container(
-              height: 300,
+              height: 40.h,
               margin: const EdgeInsets.symmetric(horizontal: 10),
               child: Image.asset('assets/stretch.png')),
           Container(
               width: double.maxFinite,
               padding: const EdgeInsets.all(10),
               color: Colors.yellowAccent,
-              child: const Column(
+              child: Column(
                 children: [
                   Text(
                     'Full body Stretching',
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
                   Text(
                     'Loosen muscles and reduce pains ',
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w300,
                         color: Colors.black),
                   ),
                 ],
               )),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 2.h,
           ),
           Expanded(
             flex: 10,
             child: Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
               ),
               child: ListView.builder(
                   shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                   itemCount: title.length,
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -157,19 +159,20 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
                         showDialogAlert(context, index);
                       },
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             title[index],
-                            style: const TextStyle(
-                                fontSize: 15,
+                            style: TextStyle(
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.green),
                           ),
                           Image.asset(
                             assets[index],
-                            height: 50,
-                            width: 100,
+                            height: 15.h,
+                            width: 30.w,
                           ),
                         ],
                       ),
@@ -189,27 +192,29 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
           return AlertDialog(
             actions: [
               Container(
-                margin: const EdgeInsets.all(10),
-                child: SingleChildScrollView(
-                    child: Column(
+                height: 60.h,
+                padding: const EdgeInsets.all(10),
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
                   children: [
-                    Image.asset(assets[index], height: 250, width: 220),
+                    Image.asset(assets[index], height: 25.h, width: 52.w),
                     Text(
                       description[index],
-                      style: const TextStyle(
-                          fontSize: 15,
+                      style: TextStyle(
+                          fontSize: 15.sp,
                           color: Colors.green,
                           fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 3.h,
                     ),
                     Text(
                       details[index],
-                      style: const TextStyle(fontSize: 12),
+                      style: TextStyle(fontSize: 12.sp),
                     )
                   ],
-                )),
+                ),
               )
             ],
           );
