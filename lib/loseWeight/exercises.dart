@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 
 class Exercises extends StatefulWidget {
   int index;
@@ -182,27 +183,30 @@ Start with 30-second sets or do 10 to 12 repetitions on each side. If you’re a
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 10),
           children: [
-            Image.asset(assetsGif[widget.index]),
+            Image.asset(
+              assetsGif[widget.index],
+              height: 50.h,
+            ),
             Text(
               heading[widget.index],
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
-                  fontSize: 20),
+                  fontSize: 18.sp),
             ),
             SizedBox(
               height: 20,
             ),
             Text(
               instructions[widget.index],
-              style: const TextStyle(color: Colors.black, fontSize: 18),
+              style: TextStyle(color: Colors.black, fontSize: 15.sp),
             ),
             SizedBox(
               height: 20,
             ),
             Text(
               properForm[widget.index],
-              style: const TextStyle(color: Colors.black, fontSize: 18),
+              style: TextStyle(color: Colors.black, fontSize: 15.sp),
             ),
             SizedBox(
               height: 20,
@@ -215,14 +219,14 @@ Start with 30-second sets or do 10 to 12 repetitions on each side. If you’re a
             ),
             Text(
               exerciseBenefits[widget.index],
-              style: const TextStyle(color: Colors.black, fontSize: 18),
+              style: TextStyle(color: Colors.black, fontSize: 15.sp),
             ),
             SizedBox(
               height: 20,
             ),
             Text(
               setsAndReps[widget.index],
-              style: const TextStyle(color: Colors.black, fontSize: 18),
+              style: TextStyle(color: Colors.black, fontSize: 15.sp),
             ),
           ],
         ));

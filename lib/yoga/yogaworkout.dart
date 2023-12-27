@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 
 class Yoga extends StatefulWidget {
   const Yoga({super.key});
@@ -194,31 +195,33 @@ Taking Child's pose is really up to your discretion, which happens to introduce 
           child: ListView.builder(
             itemCount: assets.length,
             itemBuilder: (context, index) {
-              print(assets.length);
               return Column(
                 children: [
                   Image.asset(assets[index]),
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(10),
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(10),
                         color: Colors.yellow),
                     child: Text(
                       title[index],
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.deepPurple),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(10),
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.lightGreen),
-                    child: Text(description[index]),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.cyan),
+                    child: Text(
+                      description[index],
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
                   ),
                 ],
               );

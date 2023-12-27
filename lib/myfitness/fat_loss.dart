@@ -24,7 +24,7 @@ class ScienceBehindLossWeight extends StatelessWidget {
                   Text(
                     '''Understand the Science Behind Weight Loss''',
                     style: TextStyle(
-                        fontSize: 20.sp,
+                        fontSize: 15.sp,
                         color: Colors.red,
                         fontWeight: FontWeight.bold),
                   ),
@@ -41,12 +41,12 @@ However, simply determining how many calories your body needs isn’t enough. Af
 To lose weight the healthy way, you also need to ensure your Indian diet plan is balanced i.e. it covers all food groups and provides all the nutrients you need necessary for good health.
                  
                  ''',
-                    style: TextStyle(letterSpacing: 1, fontSize: 15.sp),
+                    style: TextStyle(letterSpacing: 1, fontSize: 12.sp),
                   ),
                   Text(
                     '''The Best Indian Diet Plan for Weight Loss''',
                     style: TextStyle(
-                        fontSize: 20.sp,
+                        fontSize: 15.sp,
                         color: Colors.red,
                         fontWeight: FontWeight.bold),
                   ),
@@ -58,7 +58,7 @@ To lose weight the healthy way, you also need to ensure your Indian diet plan is
 
 The best Indian diet for weight loss is a combination of the five major food groups – fruits and vegetables, cereals and pulses, meat and dairy products, and fats and oils. Furthermore, knowing how to divvy up the food groups, allocate portion sizes, and the best/ideal time to eat is also equally important.
               ''',
-                    style: TextStyle(letterSpacing: 1, fontSize: 15.sp),
+                    style: TextStyle(letterSpacing: 1, fontSize: 12.sp),
                   ),
                 ],
               ))

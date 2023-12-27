@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'LOSE WEIGHT',
                                     style: TextStyle(
-                                        fontSize: 18.sp,
+                                        fontSize: 15.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'STRETCHING',
                                     style: TextStyle(
-                                        fontSize: 18.sp,
+                                        fontSize: 15.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'YOGA',
                                     style: TextStyle(
-                                        fontSize: 18.sp,
+                                        fontSize: 15.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     'MUSCLES',
                                     style: TextStyle(
-                                        fontSize: 18.sp,
+                                        fontSize: 15.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -205,6 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             )
                           ],
+                        ),
+                        SizedBox(
+                          height: 2.h,
                         ),
                       ],
                     )))));

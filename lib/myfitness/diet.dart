@@ -10,41 +10,43 @@ alertDialog(title, description) {
       Container(
           height: 70.h,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              SizedBox(
-                height: 2.h,
-              ),
-              Container(
-                height: 10.h,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.yellow,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 2.h,
                 ),
-                child: Text(
-                  title,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 13.sp),
+                Container(
+                  height: 10.h,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.yellow,
+                  ),
+                  child: Text(
+                    title,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 13.sp),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Text(
-                description,
-                style: TextStyle(fontSize: 15.sp),
-              )
-            ],
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(
+                  description,
+                  style: TextStyle(fontSize: 15.sp),
+                )
+              ],
+            ),
           )),
     ],
   );
 }
 
 void carbo(BuildContext context) {
-  var alert = alertDialog('Carbohydrates Diet Plan',
+  AlertDialog alert = alertDialog('Carbohydrates Diet Plan',
       '''Carbs are the body’s main source of energy and should make up half of your daily calorie requirement. However, it’s important to choose the right type of carbs. Simple carbs, such as bread, biscuit, white rice and wheat flour, contain too much sugar and are bad for you.
 
 Instead, opt for complex carbs that are high in fiber and packed with nutrients as compared to simple carbs. This is because Fiber-rich complex carbs are harder to digest, leaving you feeling full for longer, and are therefore the best option for weight control.

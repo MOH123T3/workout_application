@@ -40,6 +40,15 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   bottom_sheet: ^4.0.0
   flutter_sizer: ^1.0.5
+  flutter_launcher_icons: "^0.9.0"
+
+flutter_icons:
+  image_path: "assets/splash.png" 
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  # optionally, as transparency is not allowed on app store
+  # remove_alpha_ios: true  
 
 dev_dependencies:
   flutter_test:

@@ -13,6 +13,13 @@ class BackLayer extends StatefulWidget {
 }
 
 class _BackLayerState extends State<BackLayer> {
+  List assets = [
+    "assets/roti.jpg",
+    'assets/Carbs.jpg',
+    'assets/panner.jpg',
+    'assets/Oil.jpg',
+    'assets/meal.jpg'
+  ];
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -26,41 +33,33 @@ class _BackLayerState extends State<BackLayer> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 5),
                       height: 30.h,
-                      child: ListView(
+                      child: ListView.builder(
+                        itemCount: assets.length,
+                        itemBuilder: (context, index) {
+                          return TextButton(
+                            child: Container(
+                              width: 50.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image: AssetImage(assets[index]))),
+                            ),
+                            onPressed: () {
+                              index == 0
+                                  ? carbo(context)
+                                  : index == 1
+                                      ? protein(context)
+                                      : index == 2
+                                          ? fat(context)
+                                          : index == 3
+                                              ? vitamin(context)
+                                              : meal(context);
+                            },
+                          );
+                        },
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          TextButton(
-                            child: Image.asset('assets/roti.jpg'),
-                            onPressed: () {
-                              carbo(context);
-                            },
-                          ),
-                          TextButton(
-                            child: Image.asset('assets/Carbs.jpg'),
-                            onPressed: () {
-                              protein(context);
-                            },
-                          ),
-                          TextButton(
-                            child: Image.asset('assets/panner.jpg'),
-                            onPressed: () {
-                              fat(context);
-                            },
-                          ),
-                          TextButton(
-                            child: Image.asset('assets/Oil.jpg'),
-                            onPressed: () {
-                              vitamin(context);
-                            },
-                          ),
-                          TextButton(
-                            child: Image.asset('assets/meal.jpg'),
-                            onPressed: () {
-                              meal(context);
-                            },
-                          )
-                        ],
                       ),
                     ),
                     SizedBox(
@@ -69,7 +68,7 @@ class _BackLayerState extends State<BackLayer> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.yellow.shade400),
+                          color: Colors.white),
                       padding: EdgeInsets.all(10),
                       child: Text(
                         ' Weight Loss Diet Plan Chart',
@@ -126,7 +125,7 @@ class _BackLayerState extends State<BackLayer> {
         TextButton(
           child: Text(
             "$s :",
-            style: TextStyle(fontSize: 17.sp, color: Colors.black),
+            style: TextStyle(fontSize: 15.sp, color: Colors.black),
           ),
           onPressed: () {
             Navigator.push(

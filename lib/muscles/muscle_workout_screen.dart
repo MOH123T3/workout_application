@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
@@ -20,6 +20,8 @@ class _MuscleState extends State<Muscle> {
     "CHEST WORKOUT:",
     "SHOULDER WORKOUT:",
   ];
+  bool isUseSafeArea = false;
+  final ScrollController scrollController = ScrollController();
 
   List<String> workoutDescription = [
     "Bicep Muscles The bicep muscles help to move both the shoulder and elbow joints, as well as twist the forearm. This muscle creates a lot of your general arm movement and function. The main muscle is the two-headed biceps brachii, which sits at the front of your arm and is the most visible arm muscle. It’s supported by the deeper brachialis muscle, and brachioradialis in your forearm. Understanding the make-up of your bicep muscles will allow you to hit your workout harder and more efficiently, for maximum gains.",
@@ -44,38 +46,50 @@ class _MuscleState extends State<Muscle> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: ListView.builder(
+          padding: EdgeInsets.all(3),
           itemCount: workoutTitle.length,
           itemBuilder: (context, index) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 3.h,
+                ),
                 TextButton(
-                  onPressed: index == 0
-                      ? _biceps
-                      : index == 1
-                          ? _back
-                          : index == 2
-                              ? _leg
-                              : index == 3
-                                  ? _tricep
-                                  : index == 4
-                                      ? _chest
-                                      : _shoulder,
-                  child: Image.asset(assets[index]),
+                  onPressed: () {
+                    _showSheet(index);
+                  },
+                  child: Container(
+                    height: 35.h,
+                    decoration: BoxDecoration(
+                        boxShadow: const [BoxShadow(spreadRadius: 10)],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        image:
+                            DecorationImage(image: AssetImage(assets[index]))),
+                  ),
                 ),
                 SizedBox(
                   height: 2.h,
                 ),
-                Text(workoutTitle[index],
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 2.h,
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(workoutTitle[index],
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.sp)),
                 ),
-                Text(
-                  workoutDescription[index],
-                  style: TextStyle(color: Colors.white, fontSize: 13),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    workoutDescription[index],
+                    style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                  ),
                 ),
                 SizedBox(
                   height: 5.h,
@@ -86,36 +100,49 @@ class _MuscleState extends State<Muscle> {
         ));
   }
 
-  void _biceps() {
-    showFlexibleBottomSheet(
+  void _showSheet(index) {
+    showFlexibleBottomSheet<void>(
       minHeight: 0,
       initHeight: 0.5,
       maxHeight: 1,
-      anchors: [0, 0.5, 1],
-      isSafeArea: true,
       context: context,
-      builder: (
-        BuildContext context,
-        ScrollController scrollController,
-        double bottomSheetOffset,
-      ) {
-        return SafeArea(
-          child: Material(
-              borderRadius: BorderRadius.circular(10),
-              child: SingleChildScrollView(
-                  child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          """ 1. Barbell Cheat Curls:                                                       """,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      Image.asset('assets/muscle11.jpg'),
-                      Text("""Execution
+      isSafeArea: isUseSafeArea,
+      bottomSheetColor: Colors.white,
+      builder: (context, controller, offset) {
+        return _BottomSheet(
+            scrollController: controller,
+            bottomSheetOffset: offset,
+            index: index);
+      },
+      anchors: [0, 0.5, 1],
+      useRootScaffold: false,
+    );
+  }
+}
+
+class _BottomSheet extends StatelessWidget {
+  final ScrollController scrollController;
+  final double bottomSheetOffset;
+  final int index;
+  const _BottomSheet(
+      {required this.scrollController,
+      required this.bottomSheetOffset,
+      required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+        controller: scrollController,
+        children: index == 0
+            ? [
+                Text(
+                    """ 1. Barbell Cheat Curls:                                                       """,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+                Image.asset('assets/muscle11.jpg'),
+                Text(
+                    """Execution
 
 Choose a weight that’s a slightly heavier than you’d typically use in a barbell curl.
 Stand with your feet just wider than hip-width apart, back straight and core engaged.
@@ -130,13 +157,13 @@ Sets: 3
 Reps: To failure
 
 """),
-                      Text(
-                          """ 2. Weighted Chin-ups:                                                       """,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      Image.asset('assets/muscle13.jpg'),
-                      Text("""Execution
+                Text(
+                    """ 2. Weighted Chin-ups:                                                       """,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+                Image.asset('assets/muscle13.jpg'),
+                Text(
+                    """Execution
 
 Attach your chosen weight around your waist. 
 Hold onto the chin-up bar, with your palms facing towards you. Keep your body as straight as you can, with your core engaged.
@@ -152,13 +179,13 @@ Reps: To failure
 
 
 """),
-                      Text(
-                          """ 3. Banded Dumbbell Curls:                                                       """,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      Image.asset('assets/muscle14.jpg'),
-                      Text("""Execution
+                Text(
+                    """ 3. Banded Dumbbell Curls:                                                       """,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+                Image.asset('assets/muscle14.jpg'),
+                Text(
+                    """Execution
 
 Set yourself up with your resistance band. Hook the bottom of the band under your feet, toes pointing straight out in front.
 Hold the barbells, as well as the resistance band in both hands. 
@@ -173,13 +200,13 @@ Sets: 3
 Reps: To failure
 
 """),
-                      Text(
-                          """ 4. Dumbbell Incline Curls:                                                       """,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      Image.asset('assets/muscle15.jpg'),
-                      Text("""Execution
+                Text(
+                    """ 4. Dumbbell Incline Curls:                                                       """,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+                Image.asset('assets/muscle15.jpg'),
+                Text(
+                    """Execution
 
 Sit on your reclined seat, with the back reclined between 50 and 60 degrees. 
 Hold your dumbbells by your sides, with your arms fully extended. Your hands should be sitting slightly behind your body. 
@@ -194,13 +221,13 @@ Reps: To failure
 
 
 """),
-                      Text(
-                          """ 5. Dumbbell Curl Trifecta:                                                       """,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      Image.asset('assets/muscle16.jpg'),
-                      Text("""Execution
+                Text(
+                    """ 5. Dumbbell Curl Trifecta:                                                       """,
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+                Image.asset('assets/muscle16.jpg'),
+                Text(
+                    """Execution
 
 Stand with your feet just wider than hip-width apart, body straight, core engaged.
 Start with your hands down by your sides. 
@@ -221,39 +248,16 @@ Reps: 8, in each position on each arm
 
 
 """),
-                    ]),
-              ))),
-        );
-      },
-    );
-  }
-
-  void _back() {
-    showFlexibleBottomSheet(
-        minHeight: 0,
-        maxHeight: 1,
-        initHeight: 0.5,
-        context: context,
-        builder: (
-          BuildContext context,
-          ScrollController scrollController,
-          double bottomSheetOffset,
-        ) {
-          return SafeArea(
-            child: Material(
-                child: SingleChildScrollView(
-                    child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+              ]
+            : index == 1
+                ? [
                     Text(
                         """ 1. Deadlift:                                                       """,
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle7.jpg'),
-                    Text("""Execution:
+                    Text(
+                        """Execution:
 
 Repeat the instructions above for the straight arm pushdowns. Do 10-12 reps before each deadlift set. 
 Moving on to the deadlift, you’ll be using heavier weights for fewer reps, so load the bar appropriately. 
@@ -276,7 +280,8 @@ Reps: 4RM/4RM
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle13.jpg'),
-                    Text("""Execution:
+                    Text(
+                        """Execution:
 
 Attach your chosen weight around your waist. Make sure you opt for something fairly substantial, as you’re only doing four reps. 
 Hold onto the chin-up bar with your palms facing towards you, and hands shoulder-width apart. Keep your body as straight as you can, with your core engaged.
@@ -296,7 +301,8 @@ Reps: 4RM/8RM
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle9.jpg'),
-                    Text("""Execution:
+                    Text(
+                        """Execution:
 
 Stand in front of your bar with your feet hip-width apart. You’ll have your knees bent at the bottom of the move.
 Hold the bar in an overhand grip at shoulder width. 
@@ -318,7 +324,8 @@ Reps: 8-10
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle10.jpg'),
-                    Text("""Execution:
+                    Text(
+                        """Execution:
 
 Stand facing the cable machine, with the pulley set up high. You’ll start with your feet hip-width apart.
 Hold the cable in one hand, palms facing in. 
@@ -341,7 +348,8 @@ Reps: 10-12RM to failure on each arm
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle17.jpg'),
-                    Text("""Execution:
+                    Text(
+                        """Execution:
 
 Grab two weight plates or barbells that you can comfortably hold in your hands. 
 Lay facedown across a physioball, holding the weights in front of your chest. Stabilize yourself by planting your feet, just wider than hip-width apart, toes gripping the ground.  
@@ -372,7 +380,8 @@ Reps: 8, in each position on each arm
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle18.jpg'),
-                    Text("""Execution:
+                    Text(
+                        """Execution:
 
 Hold the bar in an overhand grip at your desired width.
 Keeping your arms straight, shrug your shoulders up.
@@ -393,39 +402,17 @@ Reps: Ladder to 10 reps
 
 
 """),
-                  ]),
-            ))),
-          );
-        },
-        anchors: [0, 0.5, 1]);
-  }
-
-  void _leg() {
-    showFlexibleBottomSheet(
-        minHeight: 0,
-        maxHeight: 1,
-        initHeight: 0.5,
-        context: context,
-        builder: (
-          BuildContext context,
-          ScrollController scrollController,
-          double bottomSheetOffset,
-        ) {
-          return SafeArea(
-            child: Material(
-                child: SingleChildScrollView(
-                    child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        """ 1. Barbell Squats:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle19.jpg'),
-                    Text("""Execution
+                  ]
+                : index == 2
+                    ? [
+                        Text(
+                            """ 1. Barbell Squats:                                                       """,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                        Image.asset('assets/muscle19.jpg'),
+                        Text(
+                            """Execution
 
 Start with the barbell across the back of your shoulders, and feet just wider than hip-width apart, toes pointed slightly out. Additionally, keep your head up and elbows tucked in. 
 Bring yourself down until your knees are at 90-degrees. 
@@ -442,12 +429,14 @@ Reps: 5RM/5RM/10RM/25RM — dropping weight each set
  
 
 """),
-                    Text(
-                        """ 2. Barbell Hip Thrust:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle20.jpg'),
-                    Text("""Execution
+                        Text(
+                            """ 2. Barbell Hip Thrust:                                                       """,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                        Image.asset('assets/muscle20.jpg'),
+                        Text(
+                            """Execution
 
 Make sure you have a box that won’t move around. 
 To set yourself up, start by sitting on the floor in front of your box. Lay your barbell across the front of your hips. Rest your upper back, across the middle of your shoulder blades, along the front edge of the box. Your feet should be flat on the floor, just wider than hip-width apart, with your toes pointed slightly outward. The distance of your feet from the box should allow your knees to be at 90-degrees at the top of the move.
@@ -466,12 +455,14 @@ Reps: 25/10/5/5 — adding weight each set
 
 
 """),
-                    Text(
-                        """ 3. 4. Dumbbell TKE Drop Lunge:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle24.jpg'),
-                    Text("""Execution
+                        Text(
+                            """ 3. 4. Dumbbell TKE Drop Lunge:                                                       """,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                        Image.asset('assets/muscle24.jpg'),
+                        Text(
+                            """Execution
 
 Attach your exercise bands very securely to a rack. Remember that the muscles in your legs are some of the largest and strongest in your body, so you’ll need higher resistance bands. 
 You’ll also need some dumbbell weights, which you’ll just hold in your hands. 
@@ -487,12 +478,14 @@ Reps: 10-12RM on each leg
  
 
 """),
-                    Text(
-                        """ 4. Bulgarian High/Low Split Squats — Plyometric Hops:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle21.jpg'),
-                    Text("""Execution
+                        Text(
+                            """ 4. Bulgarian High/Low Split Squats — Plyometric Hops:                                                       """,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                        Image.asset('assets/muscle21.jpg'),
+                        Text(
+                            """Execution
 
 Keep your position from the previous exercise; however, you’ll need to ditch the weights. 
 To start, drop into a squat.
@@ -509,12 +502,14 @@ Reps: to failure on each leg
 
 
 """),
-                    Text(
-                        """ 5. Weighted Adductor Goblet Squat:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle22.jpg'),
-                    Text("""Execution
+                        Text(
+                            """ 5. Weighted Adductor Goblet Squat:                                                       """,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                        Image.asset('assets/muscle22.jpg'),
+                        Text(
+                            """Execution
 
 Shoes off — you’ll only need to be in your socks for this exercise.
 Grab a dumbbell or weight, which you’ll hold with both hands, at the center of your chest. 
@@ -530,12 +525,14 @@ Reps: 10-12RM on each leg
 
 
 """),
-                    Text(
-                        """ 6. Hip Band Ladder Finish:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle23.jpg'),
-                    Text("""Execution
+                        Text(
+                            """ 6. Hip Band Ladder Finish:                                                       """,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                        Image.asset('assets/muscle23.jpg'),
+                        Text(
+                            """Execution
 
 Set yourself up with your resistance band. Hook the bottom of the band under your feet, toes pointing straight out in front. The top of the band needs to hook around the outside of your upper arms. To do this, clasp your hands under your chin, holding the band and scoop the band out around your elbows, which should then be perpendicular to your body.
 Keeping the bands under your feet, take one step to the left. Then take one step to the right. 
@@ -553,458 +550,432 @@ Reps: Ladder to 10 reps
 
 
 """),
-                  ]),
-            ))),
-          );
-        },
-        anchors: [0, 0.5, 1]);
-  }
-
-  void _tricep() {
-    showFlexibleBottomSheet(
-        context: context,
-        builder: (BuildContext context, ScrollController scrollController,
-            double bottomSheetOffset) {
-          return SafeArea(
-              child: Material(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        """ 1. Close Grip Bench Press :                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle31.jpg'),
-                    Text("""Execution
-              
-              Hold the barbell in an overhand grip, with your hands in line with your shoulders.
-              Keep your elbows tight and forward — resist flaring them out.
-              Maintain good bench posture — engage your core and glutes, keep your feet flat on the floor, and drive into the bench.
-              Lift the bar from the pins to a full extension, with your arms 90 degrees to your body.
-              Bring the bar back to the pins, with control.
-              You’ll complete three sets of 10, then six, then four reps. Choose a weight that will allow you to reach failure in each set. 
-              Keep in mind that as you lower the bar, unlike regular bench presses, the bar will be aiming toward your upper ribcage, rather than higher at your sternum.
-               
-              
-              Sets: 3
-              Reps: 10/6/4 — to failure
-              """),
-                    Text(
-                        """ 2. Tricep Dips:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle32.jpg'),
-                    Text("""Execution
-              
-              Set yourself up at the dip station. You’ll need an appropriate weight to hang around your waist, as well as resistance bands you can use for the assisted dips.
-              For the first set, hang the weight around your waist, or hold it between your knees, and dip until you reach failure.
-              Once you’ve reached your failure point, remove the weight, and immediately continue to dip with just your body weight. Repeat until failure.
-              Finally, for the last drop set, hang the resistance band between the bars, hooking it under your knees to continue, again, until failure.
-              Complete three lots of these tri-sets, going to failure on each set.
-              In this workout, keep your torso as upright as possible. You’ll also want to focus on pushing down through your palms, even releasing your grip slightly to ensure your forearms aren’t take over.
-              Sets: 3
-              Reps: to failure on each drop (weighted, bodyweight and assisted)
-              
-               
-              
-              
-              """),
-                    Text(
-                        """ 3. Overhead Cable Extension:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle33.jpg'),
-                    Text("""Execution
-              
-              Stand with your back to the cable machine and tilt your torso forward slightly, keeping your neck straight. Create a stable standing position by dropping one leg back behind the other.
-              Hold the cables in both hands, above and behind your head, with your elbows tucked in next to your ears.
-              Pull the cables down to a full extension in front of your head. Keep your elbows in tight.
-              Allow the cables to retract with control, pulling your arms back to the side of your head. Let your elbows go as far back as your body will allow, so the long head gets a full extension. Plus, doing this is a phenomenal stretch that feels fantastic. 
-              Repeat this action 10-12 times to failure.
-              Once you’ve maxed your set, immediately turn around to face the cable machine. 
-              Hold the cables level with your sternum, again, keeping your elbows tucked in. Your legs should be slightly wider than shoulder-width apart.
-              Drag the cables down, keeping your hands as close to your body as you can, and your elbows tucked in. You want to push down until your arms are fully extended. By doing this, you’ll achieve a full contraction in that long head. 
-              Repeat this action 10-12 times to failure.
-              Sets: 3 of each exercise, performed back to back as a drop set
-              Reps: 10-12RM — to failure
-              
-              
-              
-              """),
-                    Text(
-                        """ 4. Cable Rope Triceps Pushdown:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle34.jpg'),
-                    Text("""Execution
-              
-              Stand facing the cable machine with one foot dropped behind the other. Your weight will be on your front foot, torso leaning forward slightly, and your toes extended on the back foot, but still bearing some weight. 
-              Hold the cables at head height, keeping your elbows tucked in. 
-              Drag the cables down, until your arms are fully extended in front of your body, keeping them close to your sides. 
-              As you approach the bottom of the extension, shift your weight onto your back foot, leaning your torso back slightly. Doing this moves your body away from the machine, keeping that angle between your forearms and the cable closer to 90 degrees. 
-              Be careful to make sure you’re not using the shift in weight and body position to pull the rope — you want to ensure your arms are doing the work. 
-              Allow the cables to retract with control, shifting your weight back to the front foot, and your original position.
-              Repeat this action 12 times to failure.
-              Sets: 2
-              Reps: 12RM to failure
-              
-              e
-              
-              
-              """),
-                    Text(
-                        """ 5. Lying Triceps Extension:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle35.jpg'),
-                    Text("""Execution
-              
-              Safely and securely attach the bands to something exceptionally heavy or attached to the floor. No-one wants to get smacked in the head with exercise bands at full stretch if they accidentally pop off. 
-              Attach the other end of the bands to your chosen weights, again, making sure they’re secure.
-              Lie down on the bench, with good posture — engage your core and glutes and keep your feet flat on the floor.
-              Start with the weights held just behind the top of your head, elbows bent and tucked in close to your ears.
-              Extend your arms up toward the ceiling, with a full extension achieved when your arms are at a 90-degree angle to your body. At this point, the bands should be pulling on the weights, adding that additional tension. You should feel the burn. 
-              Lower the weights back to behind your head, allowing the elbow to extend back as far as your body allows. Doing this will allow for that brilliant stretch along the back of your arm. 
-              Repeat this action 15 times to failure.
-              Sets: 2
-              Reps: 15RM to failure
-              
-              """),
-                  ],
-                ),
-              ),
-            ),
-          ));
-        });
-  }
-
-  void _chest() {
-    showFlexibleBottomSheet(
-        context: context,
-        builder: (BuildContext context, ScrollController scrollController,
-            double bottomSheetOffset) {
-          return SafeArea(
-              child: Material(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        """ 1. Horizontal Cable/Band Crossovers :                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle41.png'),
-                    Text("""Execution
-              
-              Stand with your back to the cable machine. Have your feet just wider than hip-width apart, torso straight and core engaged. The cables should be adjusted, so they’re pulling from just above shoulder height. 
-              Hold the cables in both hands, with your arms extended out.
-              Pull the cables forward and across your body. Your arms should be at mid-chest height — the same level that the bench press worked. They should also cross over the centerline of your body. 
-              Allow the cables to retract with control, pulling your arms back, but keeping your elbows slightly bent. Allow your arms to pull back far enough that you feel a stretch across your chest, ensuring you’ve reached the full extension of that muscle. 
-              Repeat this action 15 times over four sets. With each cable pull, swap which arm crosses over the top. 
-              If you don’t have a cable machine, you can do this with resistance bands attached very securely to a weight rack. Attach them at the same height as the middle of your sternum, so the movement is horizontal. 
-               
-              
-              Sets: 4
-              
-              Reps: 15
-              
-               
-              """),
-                    Text(
-                        """ 2. Incline Dumbbell Press:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle42.jpg'),
-                    Text("""Execution
-              
-              Lie down on your inclined bench, again ensuring you have good posture. Engage your core and glutes, keep your feet flat on the floor, and drive into the bench.
-              Hold the dumbbells in an overhand grip.
-              Push your arms toward the ceiling. As you move upwards, rotate your wrist and hands slightly, so that your thumbs are leading the movement. This is the best way to engage your chest muscles, rather than have the back or triceps doing the hard yards. 
-              Release your arms down, with control, until they are back and bent, with your elbows slightly behind your body. Again you should feel that glorious stretch along your chest at the bottom of the move. 
-              You’ll complete four sets of six, then eight, then 10, and finally 12, starting with a heavier weight, which then decreases as the reps increase. 
-               
-              
-              Sets: 4
-              
-              Reps: 6/8/10/12 — dropping weight each set
-              
-                
-              
-              
-              """),
-                    Text(
-                        """ 3. High to Low Cable Cable/Band Crossovers:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle43.jpg'),
-                    Text("""Execution
-              
-              Stand with your back to the cable machine. Have your feet just wider than hip-width apart, torso straight and core engaged. This time, the cables should be adjusted, so they’re pulling from the top of the machine. 
-              Hold the cables in both hands.
-              Pull the cables forward and downwards across your body. Your arms should crossover in front of your hips.
-              Allow the cables to retract with control, pulling your arms back to the sides of your chest, keeping your elbows slightly bent. You should feel that full extension and stretch. 
-              Repeat this action 15 times over four sets. With each cable pull, swap which arm crosses over the top. 
-              If you don’t have a cable machine, you can do this with resistance bands attached very securely to a weight rack. Attach them at just below shoulder height, to the movement goes high to low, without coming over your head.
-               
-              
-              Sets: 4
-              
-              Reps: 15
-              
-              
-              
-              
-              """),
-                    Text(
-                        """ 4.Weighted Pushups :                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle44.jpg'),
-                    Text("""Execution
-              
-              Set yourself up on the floor. You’ll want your legs spread slightly, so your feet are just wider than hip-width. Your hands should press into the floor just outside shoulder width. Keep your body as straight as possible, and core engaged.
-              Pushups from your toes are the best for maximizing your efforts. However, if you’re still pretty new, you can always do these pushups from your knees. 
-              Place your preferred weight on your back, sitting across your shoulder blades. You might need to phone a friend for help with positioning them. 
-              Lower your body toward the ground until your elbows are bent at 90 degrees. You don’t want your body or chest to touch the ground.
-              Drive-up through your hands until your arms are straight. Try to focus on turning your elbows in towards your body as you rise. Doing so will result in a better chest engagement. 
-              Repeat until failure, for three sets. 
-               
-              
-              Sets: 3
-              
-              Reps: To failure
-              
-              
-              """),
-                    Text(
-                        """ 5.Band Crossovers Pushups:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle45.jpg'),
-                    Text("""Execution
-              
-              Attach your resistance band to a weight rack or fixed pole. You’ll want it positioned roughly a foot off the ground. 
-              Place yourself parallel to where you have your bands set up. The side you’re working should be closest to the bands. 
-              Maintain your overall body position on the floor, as per your previous pushups. However, you do want your legs positioned slightly wider for better stability as you move.
-              Hold the band in your hand on the side you’re working. Press down into a pushup, as usual.
-              Push back up with both hands driving into the ground. As you reach the top of the move, pull the hand holding the resistance band across your body. Then, place it on the floor to the top of your stationary hand. You should feel the contraction in the center of your chest. 
-              Return your hand to its original position, and repeat. You’ll do three sets of 15 on each side. 
-               
-              
-              Sets: 3 on each side
-              
-              Reps: 15
-              
-              
-              
-              """),
-                  ],
-                ),
-              ),
-            ),
-          ));
-        });
-  }
-
-  void _shoulder() {
-    showFlexibleBottomSheet(
-        context: context,
-        builder: (BuildContext context, ScrollController scrollController,
-            double bottomSheetOffset) {
-          return SafeArea(
-              child: Material(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        """ 1. Warm Up — Band Shoulder Press :                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle51.jpg'),
-                    Text("""Execution
-              
-              Attach your resistance bands to your power rack at around chest height. Make sure they are secure.
-              Keep your core engaged and torso slightly tilted back to make sure you’re not moving your arms behind your head.
-              Hold the band shoulder high and slightly wider than shoulder-width.
-              Push straight up until your arms are fully extended. You should feel muscle engagement at both the front and the back. 
-              Hold at the top for three seconds, repeating for two sets of 15 reps.
-               
-              
-              Sets: 2
-              
-              Reps: 15, with a 3-second hold on each
-              
-               
-               
-              """),
-                    Text(
-                        """ 2. Seated Overhead Barbell Press:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle52.jpg'),
-                    Text("""Execution
-              
-              Sit with your torso straight and feet flat on the floor. Engage your core and glutes.
-              Start with the bar at the top of your chest, and push the bar straight up, fully extending your arms. 
-              Bring the bar back down, with control. 
-              Repeat for four sets, decreasing from 10 to eight to six, and six. Use increased weight on each set, as they get shorter. 
-              Reintroduce the band that you used in the warm-up for the final set, performing this set with both the barbells and band. This will reinforce the muscle engagement.
-              If you don’t have barbells at home, you can do a handstand pushup as an alternative. If you’re an absolute beast and your body weight isn’t enough, add a weighted vest. 
-               
-              
-              Sets: 4
-              
-              Reps: 10/8/6/6 — adding weight each set
-              
-               
-              
-              
-              """),
-                    Text(
-                        """ 3. Cable Rear Deltoid Raise:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle53.jpg'),
-                    Text("""Execution
-              
-              Stand with a split stance. You’ll want the cable pulling across the front of your body, from the opposite side to the one you’re working.
-              Tilt your torso forward at the hips, keeping your back straight and core engaged.
-              Holding the cable, you’ll want your arm mostly straight across the front of your body.
-              Pull the cable back across your body. As you hit the top of the move, your elbow should be bent, and your arm pulled back as far as your body allows. You should feel a full contraction in your rear deltoid.
-              Release the cable back across your body, with control. At the bottom of this move, your arm should be extended across your torso, and you should feel a stretch along the back of your deltoid.
-               
-              
-              Sets: 3 on each arm
-              
-              Reps: 7
-              
-              
-              
-              
-              
-              """),
-                    Text(
-                        """ 4. Cable One Arm Lateral Raise :                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle54.jpg'),
-                    Text("""Execution
-              
-              Stand with a split stance. However, this time, the cable should pull across the back of your body, from the opposite side to the one you’re working.
-              Keep your torso straight and core engaged.
-              As you hold the cable, your arm will be slightly bent behind your back.
-              Pull the cable out, and as you hit the top of the move, your arm should be straight out, perpendicular to the side of your body. You should feel a full contraction in your side deltoid.
-              Release the cable back across your body, with control. At the bottom of this move, your arm should be slightly bent behind your back, and you should feel a stretch along the middle of your deltoid.
-               
-              
-              Sets: 3 on each arm
-              
-              Reps: 7
-              
-              """),
-                    Text(
-                        """ 5. Cable One Arm Forward Raise:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle55.jpg'),
-                    Text("""Execution
-              
-              Stand with a split stance, with your back to the cable pully. This time this cable will be pulling alongside your body, on the arm you are working. 
-              Keep your torso straight and core engaged.
-              Your arm will be straight and slightly behind your back as you hold the cable.
-              Pull the cable forward, and as you hit the top of the move, your arm should be perpendicular to the front of your body, but slightly bent at the elbow. You should feel a full contraction in your front deltoid.
-              Release the cable back along your body, with control. At the bottom of this move, your arm should be extended straight and pulled behind your back as far as your body allows. You should feel a stretch along the front of your deltoid.
-               
-              
-              Sets: 3 on each arm
-              
-              Reps: 7
-              
-              
-              
-              """),
-                    Text(
-                        """ 6. Cheat Lateral Dumbbell Raise:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle56.jpg'),
-                    Text("""Execution
-              
-              Position yourself into an athletic stance. Your feet will be wider than hip-width apart, knees bent but shins vertical, hips moved back, torso tilted forward, and your chest up.
-              Start with the weight in your hand, arm in front of your body, elbow slightly bent. 
-              Accelerate the weight up and out to the side, quickly, but with control. Unlike a regular lateral dumbbell raise, for this exercise, you can allow your traps to assist. 
-              At the top of the move, your arm should be out to the side of your body, at shoulder height, elbow still slightly bent. Freeze the movement here for a moment. 
-              Lower the weight, with control, back to the starting position. If you can’t control the descent, you’ll need to swap to a lighter weight.
-              While you can allow your traps to help, don’t get into too much of a swinging motion when you’re raising the weight. You want your muscles to be doing the work, not the movement. 
-              Once you’ve completed the set, move to the dumbbell push press, before returning for the next set.
-               
-              
-              Sets: 3 on each arm
-              
-              Reps: To failure
-              
-               
-              
-              
-              """),
-                    Text(
-                        """ 7. Dumbbell Push Press:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle57.jpg'),
-                    Text("""Execution
-              
-              Keep your feet in the same position. However, you’ll want to straighten up from the athletic stance. 
-              Shift the weight up to your shoulder.
-              Press the weight up above your head. Again, because this is a heavier weight, you’ll want to be pushing explosively. Use your whole body to help, including your hips and legs, slightly squatting when you push up. Just make sure your shoulders are still doing the lion’s share of work. 
-              Bring the weight back down to your shoulder with control. 
-              Once the set is complete, return to your next set of cheat lateral dumbbell raises.
-               
-              
-              Sets: 3 on each arm
-              
-              Reps: To failure
-              
-              
-              
-              
-              """),
-                    Text(
-                        """ 8. Cable Face Pulls:                                                       """,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
-                    Image.asset('assets/muscle58.jpg'),
-                    Text("""Execution
-              
-              Stand facing the cable machine, with the cable set up high. Your feet should be just wider than your hips, your torso straight, and as always, your core engaged. 
-              Hold the cables in an overhand grip, and pull them back towards your face. Keep your elbows down next to your body, rather than up around your head. 
-              As you pull, you want to rotate your hands slightly so that your thumbs are pointing back. This will fully work the rotator cuff, incorporating it with your rear deltoid. You should feel the contraction between your shoulder blades. 
-              Allow the cables to return, with control, to the front, and your arms extended. 
-              Sets: 3
-              
-              Reps: 15
-              
-               
-              
-              
-              
-              """),
-                  ],
-                ),
-              ),
-            ),
-          ));
-        });
+                      ]
+                    : index == 3
+                        ? [
+                            Text(
+                                """ 1. Close Grip Bench Press :                                                       """,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            Image.asset('assets/muscle31.jpg'),
+                            Text(
+                                """Execution
+            
+            Hold the barbell in an overhand grip, with your hands in line with your shoulders.
+            Keep your elbows tight and forward — resist flaring them out.
+            Maintain good bench posture — engage your core and glutes, keep your feet flat on the floor, and drive into the bench.
+            Lift the bar from the pins to a full extension, with your arms 90 degrees to your body.
+            Bring the bar back to the pins, with control.
+            You’ll complete three sets of 10, then six, then four reps. Choose a weight that will allow you to reach failure in each set. 
+            Keep in mind that as you lower the bar, unlike regular bench presses, the bar will be aiming toward your upper ribcage, rather than higher at your sternum.
+             
+            
+            Sets: 3
+            Reps: 10/6/4 — to failure
+            """),
+                            Text(
+                                """ 2. Tricep Dips:                                                       """,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            Image.asset('assets/muscle32.jpg'),
+                            Text(
+                                """Execution
+            
+            Set yourself up at the dip station. You’ll need an appropriate weight to hang around your waist, as well as resistance bands you can use for the assisted dips.
+            For the first set, hang the weight around your waist, or hold it between your knees, and dip until you reach failure.
+            Once you’ve reached your failure point, remove the weight, and immediately continue to dip with just your body weight. Repeat until failure.
+            Finally, for the last drop set, hang the resistance band between the bars, hooking it under your knees to continue, again, until failure.
+            Complete three lots of these tri-sets, going to failure on each set.
+            In this workout, keep your torso as upright as possible. You’ll also want to focus on pushing down through your palms, even releasing your grip slightly to ensure your forearms aren’t take over.
+            Sets: 3
+            Reps: to failure on each drop (weighted, bodyweight and assisted)
+            
+             
+            
+            
+            """),
+                            Text(
+                                """ 3. Overhead Cable Extension:                                                       """,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            Image.asset('assets/muscle33.jpg'),
+                            Text(
+                                """Execution
+            
+            Stand with your back to the cable machine and tilt your torso forward slightly, keeping your neck straight. Create a stable standing position by dropping one leg back behind the other.
+            Hold the cables in both hands, above and behind your head, with your elbows tucked in next to your ears.
+            Pull the cables down to a full extension in front of your head. Keep your elbows in tight.
+            Allow the cables to retract with control, pulling your arms back to the side of your head. Let your elbows go as far back as your body will allow, so the long head gets a full extension. Plus, doing this is a phenomenal stretch that feels fantastic. 
+            Repeat this action 10-12 times to failure.
+            Once you’ve maxed your set, immediately turn around to face the cable machine. 
+            Hold the cables level with your sternum, again, keeping your elbows tucked in. Your legs should be slightly wider than shoulder-width apart.
+            Drag the cables down, keeping your hands as close to your body as you can, and your elbows tucked in. You want to push down until your arms are fully extended. By doing this, you’ll achieve a full contraction in that long head. 
+            Repeat this action 10-12 times to failure.
+            Sets: 3 of each exercise, performed back to back as a drop set
+            Reps: 10-12RM — to failure
+            
+            
+            
+            """),
+                            Text(
+                                """ 4. Cable Rope Triceps Pushdown:                                                       """,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            Image.asset('assets/muscle34.jpg'),
+                            Text(
+                                """Execution
+            
+            Stand facing the cable machine with one foot dropped behind the other. Your weight will be on your front foot, torso leaning forward slightly, and your toes extended on the back foot, but still bearing some weight. 
+            Hold the cables at head height, keeping your elbows tucked in. 
+            Drag the cables down, until your arms are fully extended in front of your body, keeping them close to your sides. 
+            As you approach the bottom of the extension, shift your weight onto your back foot, leaning your torso back slightly. Doing this moves your body away from the machine, keeping that angle between your forearms and the cable closer to 90 degrees. 
+            Be careful to make sure you’re not using the shift in weight and body position to pull the rope — you want to ensure your arms are doing the work. 
+            Allow the cables to retract with control, shifting your weight back to the front foot, and your original position.
+            Repeat this action 12 times to failure.
+            Sets: 2
+            Reps: 12RM to failure
+            
+            e
+            
+            
+            """),
+                            Text(
+                                """ 5. Lying Triceps Extension:                                                       """,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            Image.asset('assets/muscle35.jpg'),
+                            Text(
+                                """Execution
+            
+            Safely and securely attach the bands to something exceptionally heavy or attached to the floor. No-one wants to get smacked in the head with exercise bands at full stretch if they accidentally pop off. 
+            Attach the other end of the bands to your chosen weights, again, making sure they’re secure.
+            Lie down on the bench, with good posture — engage your core and glutes and keep your feet flat on the floor.
+            Start with the weights held just behind the top of your head, elbows bent and tucked in close to your ears.
+            Extend your arms up toward the ceiling, with a full extension achieved when your arms are at a 90-degree angle to your body. At this point, the bands should be pulling on the weights, adding that additional tension. You should feel the burn. 
+            Lower the weights back to behind your head, allowing the elbow to extend back as far as your body allows. Doing this will allow for that brilliant stretch along the back of your arm. 
+            Repeat this action 15 times to failure.
+            Sets: 2
+            Reps: 15RM to failure
+            
+            """),
+                          ]
+                        : index == 4
+                            ? [
+                                Text(
+                                    """ 1. Horizontal Cable/Band Crossovers :                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle41.png'),
+                                Text(
+                                    """Execution
+            
+            Stand with your back to the cable machine. Have your feet just wider than hip-width apart, torso straight and core engaged. The cables should be adjusted, so they’re pulling from just above shoulder height. 
+            Hold the cables in both hands, with your arms extended out.
+            Pull the cables forward and across your body. Your arms should be at mid-chest height — the same level that the bench press worked. They should also cross over the centerline of your body. 
+            Allow the cables to retract with control, pulling your arms back, but keeping your elbows slightly bent. Allow your arms to pull back far enough that you feel a stretch across your chest, ensuring you’ve reached the full extension of that muscle. 
+            Repeat this action 15 times over four sets. With each cable pull, swap which arm crosses over the top. 
+            If you don’t have a cable machine, you can do this with resistance bands attached very securely to a weight rack. Attach them at the same height as the middle of your sternum, so the movement is horizontal. 
+             
+            
+            Sets: 4
+            
+            Reps: 15
+            
+             
+            """),
+                                Text(
+                                    """ 2. Incline Dumbbell Press:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle42.jpg'),
+                                Text(
+                                    """Execution
+            
+            Lie down on your inclined bench, again ensuring you have good posture. Engage your core and glutes, keep your feet flat on the floor, and drive into the bench.
+            Hold the dumbbells in an overhand grip.
+            Push your arms toward the ceiling. As you move upwards, rotate your wrist and hands slightly, so that your thumbs are leading the movement. This is the best way to engage your chest muscles, rather than have the back or triceps doing the hard yards. 
+            Release your arms down, with control, until they are back and bent, with your elbows slightly behind your body. Again you should feel that glorious stretch along your chest at the bottom of the move. 
+            You’ll complete four sets of six, then eight, then 10, and finally 12, starting with a heavier weight, which then decreases as the reps increase. 
+             
+            
+            Sets: 4
+            
+            Reps: 6/8/10/12 — dropping weight each set
+            
+              
+            
+            
+            """),
+                                Text(
+                                    """ 3. High to Low Cable Cable/Band Crossovers:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle43.jpg'),
+                                Text(
+                                    """Execution
+            
+            Stand with your back to the cable machine. Have your feet just wider than hip-width apart, torso straight and core engaged. This time, the cables should be adjusted, so they’re pulling from the top of the machine. 
+            Hold the cables in both hands.
+            Pull the cables forward and downwards across your body. Your arms should crossover in front of your hips.
+            Allow the cables to retract with control, pulling your arms back to the sides of your chest, keeping your elbows slightly bent. You should feel that full extension and stretch. 
+            Repeat this action 15 times over four sets. With each cable pull, swap which arm crosses over the top. 
+            If you don’t have a cable machine, you can do this with resistance bands attached very securely to a weight rack. Attach them at just below shoulder height, to the movement goes high to low, without coming over your head.
+             
+            
+            Sets: 4
+            
+            Reps: 15
+            
+            
+            
+            
+            """),
+                                Text(
+                                    """ 4.Weighted Pushups :                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle44.jpg'),
+                                Text(
+                                    """Execution
+            
+            Set yourself up on the floor. You’ll want your legs spread slightly, so your feet are just wider than hip-width. Your hands should press into the floor just outside shoulder width. Keep your body as straight as possible, and core engaged.
+            Pushups from your toes are the best for maximizing your efforts. However, if you’re still pretty new, you can always do these pushups from your knees. 
+            Place your preferred weight on your back, sitting across your shoulder blades. You might need to phone a friend for help with positioning them. 
+            Lower your body toward the ground until your elbows are bent at 90 degrees. You don’t want your body or chest to touch the ground.
+            Drive-up through your hands until your arms are straight. Try to focus on turning your elbows in towards your body as you rise. Doing so will result in a better chest engagement. 
+            Repeat until failure, for three sets. 
+             
+            
+            Sets: 3
+            
+            Reps: To failure
+            
+            
+            """),
+                                Text(
+                                    """ 5.Band Crossovers Pushups:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle45.jpg'),
+                                Text(
+                                    """Execution
+            
+            Attach your resistance band to a weight rack or fixed pole. You’ll want it positioned roughly a foot off the ground. 
+            Place yourself parallel to where you have your bands set up. The side you’re working should be closest to the bands. 
+            Maintain your overall body position on the floor, as per your previous pushups. However, you do want your legs positioned slightly wider for better stability as you move.
+            Hold the band in your hand on the side you’re working. Press down into a pushup, as usual.
+            Push back up with both hands driving into the ground. As you reach the top of the move, pull the hand holding the resistance band across your body. Then, place it on the floor to the top of your stationary hand. You should feel the contraction in the center of your chest. 
+            Return your hand to its original position, and repeat. You’ll do three sets of 15 on each side. 
+             
+            
+            Sets: 3 on each side
+            
+            Reps: 15
+            
+            
+            
+            """),
+                              ]
+                            : [
+                                Text(
+                                    """ 1. Warm Up — Band Shoulder Press :                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle51.jpg'),
+                                Text(
+                                    """Execution
+            
+            Attach your resistance bands to your power rack at around chest height. Make sure they are secure.
+            Keep your core engaged and torso slightly tilted back to make sure you’re not moving your arms behind your head.
+            Hold the band shoulder high and slightly wider than shoulder-width.
+            Push straight up until your arms are fully extended. You should feel muscle engagement at both the front and the back. 
+            Hold at the top for three seconds, repeating for two sets of 15 reps.
+             
+            
+            Sets: 2
+            
+            Reps: 15, with a 3-second hold on each
+            
+             
+             
+            """),
+                                Text(
+                                    """ 2. Seated Overhead Barbell Press:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle52.jpg'),
+                                Text(
+                                    """Execution
+            
+            Sit with your torso straight and feet flat on the floor. Engage your core and glutes.
+            Start with the bar at the top of your chest, and push the bar straight up, fully extending your arms. 
+            Bring the bar back down, with control. 
+            Repeat for four sets, decreasing from 10 to eight to six, and six. Use increased weight on each set, as they get shorter. 
+            Reintroduce the band that you used in the warm-up for the final set, performing this set with both the barbells and band. This will reinforce the muscle engagement.
+            If you don’t have barbells at home, you can do a handstand pushup as an alternative. If you’re an absolute beast and your body weight isn’t enough, add a weighted vest. 
+             
+            
+            Sets: 4
+            
+            Reps: 10/8/6/6 — adding weight each set
+            
+             
+            
+            
+            """),
+                                Text(
+                                    """ 3. Cable Rear Deltoid Raise:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle53.jpg'),
+                                Text(
+                                    """Execution
+            
+            Stand with a split stance. You’ll want the cable pulling across the front of your body, from the opposite side to the one you’re working.
+            Tilt your torso forward at the hips, keeping your back straight and core engaged.
+            Holding the cable, you’ll want your arm mostly straight across the front of your body.
+            Pull the cable back across your body. As you hit the top of the move, your elbow should be bent, and your arm pulled back as far as your body allows. You should feel a full contraction in your rear deltoid.
+            Release the cable back across your body, with control. At the bottom of this move, your arm should be extended across your torso, and you should feel a stretch along the back of your deltoid.
+             
+            
+            Sets: 3 on each arm
+            
+            Reps: 7
+            
+            
+            
+            
+            
+            """),
+                                Text(
+                                    """ 4. Cable One Arm Lateral Raise :                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle54.jpg'),
+                                Text(
+                                    """Execution
+            
+            Stand with a split stance. However, this time, the cable should pull across the back of your body, from the opposite side to the one you’re working.
+            Keep your torso straight and core engaged.
+            As you hold the cable, your arm will be slightly bent behind your back.
+            Pull the cable out, and as you hit the top of the move, your arm should be straight out, perpendicular to the side of your body. You should feel a full contraction in your side deltoid.
+            Release the cable back across your body, with control. At the bottom of this move, your arm should be slightly bent behind your back, and you should feel a stretch along the middle of your deltoid.
+             
+            
+            Sets: 3 on each arm
+            
+            Reps: 7
+            
+            """),
+                                Text(
+                                    """ 5. Cable One Arm Forward Raise:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle55.jpg'),
+                                Text(
+                                    """Execution
+            
+            Stand with a split stance, with your back to the cable pully. This time this cable will be pulling alongside your body, on the arm you are working. 
+            Keep your torso straight and core engaged.
+            Your arm will be straight and slightly behind your back as you hold the cable.
+            Pull the cable forward, and as you hit the top of the move, your arm should be perpendicular to the front of your body, but slightly bent at the elbow. You should feel a full contraction in your front deltoid.
+            Release the cable back along your body, with control. At the bottom of this move, your arm should be extended straight and pulled behind your back as far as your body allows. You should feel a stretch along the front of your deltoid.
+             
+            
+            Sets: 3 on each arm
+            
+            Reps: 7
+            
+            
+            
+            """),
+                                Text(
+                                    """ 6. Cheat Lateral Dumbbell Raise:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle56.jpg'),
+                                Text(
+                                    """Execution
+            
+            Position yourself into an athletic stance. Your feet will be wider than hip-width apart, knees bent but shins vertical, hips moved back, torso tilted forward, and your chest up.
+            Start with the weight in your hand, arm in front of your body, elbow slightly bent. 
+            Accelerate the weight up and out to the side, quickly, but with control. Unlike a regular lateral dumbbell raise, for this exercise, you can allow your traps to assist. 
+            At the top of the move, your arm should be out to the side of your body, at shoulder height, elbow still slightly bent. Freeze the movement here for a moment. 
+            Lower the weight, with control, back to the starting position. If you can’t control the descent, you’ll need to swap to a lighter weight.
+            While you can allow your traps to help, don’t get into too much of a swinging motion when you’re raising the weight. You want your muscles to be doing the work, not the movement. 
+            Once you’ve completed the set, move to the dumbbell push press, before returning for the next set.
+             
+            
+            Sets: 3 on each arm
+            
+            Reps: To failure
+            
+             
+            
+            
+            """),
+                                Text(
+                                    """ 7. Dumbbell Push Press:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle57.jpg'),
+                                Text(
+                                    """Execution
+            
+            Keep your feet in the same position. However, you’ll want to straighten up from the athletic stance. 
+            Shift the weight up to your shoulder.
+            Press the weight up above your head. Again, because this is a heavier weight, you’ll want to be pushing explosively. Use your whole body to help, including your hips and legs, slightly squatting when you push up. Just make sure your shoulders are still doing the lion’s share of work. 
+            Bring the weight back down to your shoulder with control. 
+            Once the set is complete, return to your next set of cheat lateral dumbbell raises.
+             
+            
+            Sets: 3 on each arm
+            
+            Reps: To failure
+            
+            
+            
+            
+            """),
+                                Text(
+                                    """ 8. Cable Face Pulls:                                                       """,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                Image.asset('assets/muscle58.jpg'),
+                                Text(
+                                    """Execution
+            
+            Stand facing the cable machine, with the cable set up high. Your feet should be just wider than your hips, your torso straight, and as always, your core engaged. 
+            Hold the cables in an overhand grip, and pull them back towards your face. Keep your elbows down next to your body, rather than up around your head. 
+            As you pull, you want to rotate your hands slightly so that your thumbs are pointing back. This will fully work the rotator cuff, incorporating it with your rear deltoid. You should feel the contraction between your shoulder blades. 
+            Allow the cables to return, with control, to the front, and your arms extended. 
+            Sets: 3
+            
+            Reps: 15
+            
+             
+            
+            
+            
+            """)
+                              ]);
   }
 }

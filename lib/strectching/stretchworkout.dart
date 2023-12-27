@@ -108,7 +108,7 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.cyan,
       body: Column(
         children: [
           Container(
@@ -118,8 +118,9 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
           Container(
               width: double.maxFinite,
               padding: const EdgeInsets.all(10),
-              color: Colors.yellowAccent,
+              color: Colors.white,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Full body Stretching',
@@ -164,10 +165,8 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
                         children: [
                           Text(
                             title[index],
-                            style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green),
+                            style:
+                                TextStyle(fontSize: 15.sp, color: Colors.black),
                           ),
                           Image.asset(
                             assets[index],
@@ -193,7 +192,7 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
             actions: [
               Container(
                 height: 60.h,
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
                 child: ListView(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
@@ -202,9 +201,9 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
                     Text(
                       description[index],
                       style: TextStyle(
-                          fontSize: 15.sp,
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 15.sp,
+                        color: Colors.black,
+                      ),
                     ),
                     SizedBox(
                       height: 3.h,
