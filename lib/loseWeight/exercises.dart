@@ -183,6 +183,20 @@ Start with 30-second sets or do 10 to 12 repetitions on each side. If you’re a
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 10),
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      size: 3.h,
+                    )),
+              ),
+            ),
             Image.asset(
               assetsGif[widget.index],
               height: 50.h,

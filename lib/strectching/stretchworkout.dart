@@ -111,6 +111,20 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
       backgroundColor: Colors.cyan,
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 30, left: 15),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 3.h,
+                  )),
+            ),
+          ),
           Container(
               height: 40.h,
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -190,29 +204,44 @@ Step 4. Repeat this series until you feel warm, but not fatigued.'''
         builder: (BuildContext context) {
           return AlertDialog(
             actions: [
+              Padding(
+                padding: const EdgeInsets.only(top: 5, left: 10),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 3.h,
+                      )),
+                ),
+              ),
               Container(
                 height: 60.h,
                 padding: const EdgeInsets.all(5),
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  children: [
-                    Image.asset(assets[index], height: 25.h, width: 52.w),
-                    Text(
-                      description[index],
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        color: Colors.black,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      Image.asset(assets[index], height: 25.h, width: 52.w),
+                      Text(
+                        description[index],
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    Text(
-                      details[index],
-                      style: TextStyle(fontSize: 12.sp),
-                    )
-                  ],
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Text(
+                        details[index],
+                        style: TextStyle(fontSize: 12.sp),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

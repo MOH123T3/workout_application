@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: AnimationConfiguration.toStaggeredList(
-                      duration: const Duration(seconds: 3),
+                      duration: const Duration(seconds: 1),
                       childAnimationBuilder: (widget) => SlideAnimation(
                           horizontalOffset: 30.0,
                           child: FadeInAnimation(
@@ -67,34 +67,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 20.h,
-                              width: 30.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.cyan),
-                              child: Image(
-                                  image: AssetImage('assets/treadmill.png')),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WeightLoss()));
+                              },
+                              child: Container(
+                                height: 20.h,
+                                width: 30.w,
+                                decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(blurRadius: 1)],
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.cyan),
+                                child: Image(
+                                    image: AssetImage('assets/treadmill.png')),
+                              ),
                             ),
                             Container(
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.cyan),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WeightLoss()));
-                                  },
-                                  child: Text(
-                                    'LOSE WEIGHT',
-                                    style: TextStyle(
-                                        fontSize: 15.sp,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                child: Text(
+                                  'LOSE WEIGHT',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                                 ))
                           ],
                         ),
@@ -103,33 +104,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Stretching()));
-                                  },
-                                  child: Text(
-                                    'STRETCHING',
-                                    style: TextStyle(
-                                        fontSize: 15.sp,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                            Container(
-                              height: 20.h,
-                              width: 30.w,
+                              padding: EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.cyan),
-                              child: Image(
-                                  image: AssetImage('assets/stretching.png')),
+                              child: Text(
+                                'STRETCHING',
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Stretching()));
+                              },
+                              child: Container(
+                                height: 20.h,
+                                width: 30.w,
+                                decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(blurRadius: 1)],
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.cyan),
+                                child: Image(
+                                    image: AssetImage('assets/stretching.png')),
+                              ),
                             )
                           ],
                         ),
@@ -138,34 +141,37 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 20.h,
-                              width: 30.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.cyan),
-                              child: Image(
-                                  image: AssetImage('assets/meditation.png')),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Yoga()));
+                              },
+                              child: Container(
+                                height: 20.h,
+                                width: 30.w,
+                                decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(blurRadius: 1)],
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.cyan),
+                                child: Image(
+                                    image: AssetImage('assets/meditation.png')),
+                              ),
                             ),
                             Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Yoga()));
-                                  },
-                                  child: Text(
-                                    'YOGA',
-                                    style: TextStyle(
-                                        fontSize: 15.sp,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ))
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.cyan),
+                              child: Text(
+                                'YOGA',
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
                           ],
                         ),
                         // MUSCLES
@@ -174,33 +180,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Muscle()));
-                                  },
-                                  child: Text(
-                                    'MUSCLES',
-                                    style: TextStyle(
-                                        fontSize: 15.sp,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                            Container(
-                              height: 20.h,
-                              width: 30.w,
+                              padding: EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.cyan),
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/builder.png',
+                              child: Text(
+                                'MUSCLES',
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Muscle()));
+                              },
+                              child: Container(
+                                height: 20.h,
+                                width: 30.w,
+                                decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(blurRadius: 1)],
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.cyan),
+                                child: Image(
+                                  image: AssetImage(
+                                    'assets/builder.png',
+                                  ),
                                 ),
                               ),
                             )

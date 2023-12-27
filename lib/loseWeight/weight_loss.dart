@@ -22,8 +22,6 @@ class _WeightLossState extends State<WeightLoss> {
     'Single Arm Dumbbell Snatch'
   ];
 
-  List subTitle = ['1', '2', '3', '4', '5', '6'];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,43 +31,44 @@ class _WeightLossState extends State<WeightLoss> {
           children: [
             Container(
               color: Colors.yellow,
-              padding: const EdgeInsets.only(top: 50),
-              child: Image.asset(
-                'assets/111.png',
-                height: 150,
-                width: double.maxFinite,
+              padding: const EdgeInsets.only(top: 12, bottom: 6),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25, left: 15),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            size: 3.h,
+                          )),
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/111.png',
+                    height: 150,
+                    width: double.maxFinite,
+                  ),
+                ],
               ),
             ),
-            Container(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(0),
-                  color: Colors.yellow,
-                ),
-                alignment: Alignment.centerLeft,
-                child: TextButton(
-                  onPressed: () {
-                    alert(context);
-                  },
-                  child: Text(
-                    'These 6 Exercises Will Help You Blast Belly Fat',
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                )),
             Container(
               color: Colors.white,
               child: Row(
                 children: [
                   TextButton(
                     child: Text(
-                      'BACK',
-                      style: TextStyle(fontSize: 15.sp),
+                      'These 6 Exercises Will Help You Blast Belly Fat',
+                      style: TextStyle(fontSize: 15.sp, color: Colors.black),
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                      alert(context);
                     },
                   )
                 ],
@@ -80,7 +79,7 @@ class _WeightLossState extends State<WeightLoss> {
               itemCount: title.length,
               itemBuilder: (context, index) {
                 return _TransitionListTile(
-                  title: "${title[index]}  ${subTitle[index]}",
+                  title: "${title[index]}",
                   subtitle: "",
                   onTap: () {
                     if (index == 3) {
@@ -121,33 +120,39 @@ class _TransitionListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
-      ),
-      leading: Container(
-        width: 15.w,
-        height: 5.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          border: Border.all(
-            color: Colors.red,
-          ),
-        ),
-        child: Icon(
-          Icons.play_arrow,
-          size: 25.sp,
-          color: Colors.yellow,
-        ),
-      ),
-      textColor: Colors.white,
+    return InkWell(
       onTap: onTap,
-      iconColor: Colors.red,
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 12.sp),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 60,
+              height: 4.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                border: Border.all(
+                  color: Colors.red,
+                ),
+              ),
+              child: Icon(
+                Icons.play_arrow,
+                size: 25.sp,
+                color: Colors.yellow,
+              ),
+            ),
+            SizedBox(
+              width: 2.w,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 15.sp, color: Colors.white),
+            )
+          ],
+        ),
       ),
-      subtitle: Text(subtitle),
     );
   }
 }

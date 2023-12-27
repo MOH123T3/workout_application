@@ -176,6 +176,21 @@ Roti (1 roti/chapati)
         itemCount: 1,
         itemBuilder: (context, index) {
           return Column(children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10, left: 15),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      size: 3.h,
+                      color: Colors.white,
+                    )),
+              ),
+            ),
             Image(image: AssetImage(assets[widget.index]), height: 40.h),
             Container(
                 padding: const EdgeInsets.all(20),

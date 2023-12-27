@@ -197,6 +197,22 @@ Taking Child's pose is really up to your discretion, which happens to introduce 
             itemBuilder: (context, index) {
               return Column(
                 children: [
+                  index == 0
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 15),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 3.h,
+                                )),
+                          ),
+                        )
+                      : SizedBox(),
                   Image.asset(assets[index]),
                   Container(
                     padding: EdgeInsets.all(10),

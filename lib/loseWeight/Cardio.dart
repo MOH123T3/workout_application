@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 
 class CardioExercises extends StatefulWidget {
   int index;
@@ -354,6 +355,20 @@ To practice proper exercise form, start with the bent over row and plank leg lif
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 25),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 3.h,
+                      )),
+                ),
+              ),
               Image.asset(
                 assetsGif[widget.index],
               ),
@@ -362,7 +377,7 @@ To practice proper exercise form, start with the bent over row and plank leg lif
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
-                    fontSize: 20),
+                    fontSize: 18.sp),
               ),
               SizedBox(
                 height: 10,
@@ -371,7 +386,7 @@ To practice proper exercise form, start with the bent over row and plank leg lif
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   instructions[widget.index],
-                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                  style: TextStyle(color: Colors.black, fontSize: 15.sp),
                 ),
               ),
               SizedBox(
@@ -379,7 +394,7 @@ To practice proper exercise form, start with the bent over row and plank leg lif
               ),
               Text(
                 properForm[widget.index],
-                style: const TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 15.sp),
               ),
               SizedBox(
                 height: 20,
@@ -392,14 +407,14 @@ To practice proper exercise form, start with the bent over row and plank leg lif
               ),
               Text(
                 exerciseBenefits[widget.index],
-                style: const TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 15.sp),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
                 setsAndReps[widget.index],
-                style: const TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 15.sp),
               ),
               SizedBox(
                 height: 10,

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:gym_project/loseWeight/Cardio.dart';
 
 class CardioRow extends StatefulWidget {
@@ -48,8 +49,23 @@ class _CardioRowState extends State<CardioRow> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 25, left: 15),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 3.h,
+                        color: Colors.white,
+                      )),
+                ),
+              ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               SizedBox(
                 height: 30,
@@ -60,7 +76,7 @@ class _CardioRowState extends State<CardioRow> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 22),
+                        fontSize: 20.sp),
                   ),
                 ),
               ),
@@ -75,7 +91,7 @@ class _CardioRowState extends State<CardioRow> {
                           title: Text(
                             title[index],
                             style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 18.sp,
                                 color: Colors.yellow,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -84,8 +100,7 @@ class _CardioRowState extends State<CardioRow> {
                             child: Text(
                               subTitle[index],
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  color: Colors.white, fontSize: 15.sp),
                             ),
                           ),
                           onTap: () {

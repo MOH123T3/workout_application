@@ -53,8 +53,25 @@ class _MuscleState extends State<Muscle> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                index == 0
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 15),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                size: 3.h,
+                                color: Colors.white,
+                              )),
+                        ),
+                      )
+                    : SizedBox(),
                 SizedBox(
-                  height: 3.h,
+                  height: 2.h,
                 ),
                 TextButton(
                   onPressed: () {
@@ -136,13 +153,26 @@ class _BottomSheet extends StatelessWidget {
         controller: scrollController,
         children: index == 0
             ? [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 15),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 3.h,
+                        )),
+                  ),
+                ),
                 Text(
                     """ 1. Barbell Cheat Curls:                                                       """,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
                 Image.asset('assets/muscle11.jpg'),
-                Text(
-                    """Execution
+                Text("""Execution
 
 Choose a weight that’s a slightly heavier than you’d typically use in a barbell curl.
 Stand with your feet just wider than hip-width apart, back straight and core engaged.
@@ -162,8 +192,7 @@ Reps: To failure
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
                 Image.asset('assets/muscle13.jpg'),
-                Text(
-                    """Execution
+                Text("""Execution
 
 Attach your chosen weight around your waist. 
 Hold onto the chin-up bar, with your palms facing towards you. Keep your body as straight as you can, with your core engaged.
@@ -184,8 +213,7 @@ Reps: To failure
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
                 Image.asset('assets/muscle14.jpg'),
-                Text(
-                    """Execution
+                Text("""Execution
 
 Set yourself up with your resistance band. Hook the bottom of the band under your feet, toes pointing straight out in front.
 Hold the barbells, as well as the resistance band in both hands. 
@@ -205,8 +233,7 @@ Reps: To failure
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
                 Image.asset('assets/muscle15.jpg'),
-                Text(
-                    """Execution
+                Text("""Execution
 
 Sit on your reclined seat, with the back reclined between 50 and 60 degrees. 
 Hold your dumbbells by your sides, with your arms fully extended. Your hands should be sitting slightly behind your body. 
@@ -226,8 +253,7 @@ Reps: To failure
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
                 Image.asset('assets/muscle16.jpg'),
-                Text(
-                    """Execution
+                Text("""Execution
 
 Stand with your feet just wider than hip-width apart, body straight, core engaged.
 Start with your hands down by your sides. 
@@ -251,13 +277,26 @@ Reps: 8, in each position on each arm
               ]
             : index == 1
                 ? [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 15),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 3.h,
+                            )),
+                      ),
+                    ),
                     Text(
                         """ 1. Deadlift:                                                       """,
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle7.jpg'),
-                    Text(
-                        """Execution:
+                    Text("""Execution:
 
 Repeat the instructions above for the straight arm pushdowns. Do 10-12 reps before each deadlift set. 
 Moving on to the deadlift, you’ll be using heavier weights for fewer reps, so load the bar appropriately. 
@@ -280,8 +319,7 @@ Reps: 4RM/4RM
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle13.jpg'),
-                    Text(
-                        """Execution:
+                    Text("""Execution:
 
 Attach your chosen weight around your waist. Make sure you opt for something fairly substantial, as you’re only doing four reps. 
 Hold onto the chin-up bar with your palms facing towards you, and hands shoulder-width apart. Keep your body as straight as you can, with your core engaged.
@@ -301,8 +339,7 @@ Reps: 4RM/8RM
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle9.jpg'),
-                    Text(
-                        """Execution:
+                    Text("""Execution:
 
 Stand in front of your bar with your feet hip-width apart. You’ll have your knees bent at the bottom of the move.
 Hold the bar in an overhand grip at shoulder width. 
@@ -324,8 +361,7 @@ Reps: 8-10
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle10.jpg'),
-                    Text(
-                        """Execution:
+                    Text("""Execution:
 
 Stand facing the cable machine, with the pulley set up high. You’ll start with your feet hip-width apart.
 Hold the cable in one hand, palms facing in. 
@@ -348,8 +384,7 @@ Reps: 10-12RM to failure on each arm
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle17.jpg'),
-                    Text(
-                        """Execution:
+                    Text("""Execution:
 
 Grab two weight plates or barbells that you can comfortably hold in your hands. 
 Lay facedown across a physioball, holding the weights in front of your chest. Stabilize yourself by planting your feet, just wider than hip-width apart, toes gripping the ground.  
@@ -380,8 +415,7 @@ Reps: 8, in each position on each arm
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
                     Image.asset('assets/muscle18.jpg'),
-                    Text(
-                        """Execution:
+                    Text("""Execution:
 
 Hold the bar in an overhand grip at your desired width.
 Keeping your arms straight, shrug your shoulders up.
@@ -405,14 +439,27 @@ Reps: Ladder to 10 reps
                   ]
                 : index == 2
                     ? [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 15),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 3.h,
+                                )),
+                          ),
+                        ),
                         Text(
                             """ 1. Barbell Squats:                                                       """,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         Image.asset('assets/muscle19.jpg'),
-                        Text(
-                            """Execution
+                        Text("""Execution
 
 Start with the barbell across the back of your shoulders, and feet just wider than hip-width apart, toes pointed slightly out. Additionally, keep your head up and elbows tucked in. 
 Bring yourself down until your knees are at 90-degrees. 
@@ -435,8 +482,7 @@ Reps: 5RM/5RM/10RM/25RM — dropping weight each set
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         Image.asset('assets/muscle20.jpg'),
-                        Text(
-                            """Execution
+                        Text("""Execution
 
 Make sure you have a box that won’t move around. 
 To set yourself up, start by sitting on the floor in front of your box. Lay your barbell across the front of your hips. Rest your upper back, across the middle of your shoulder blades, along the front edge of the box. Your feet should be flat on the floor, just wider than hip-width apart, with your toes pointed slightly outward. The distance of your feet from the box should allow your knees to be at 90-degrees at the top of the move.
@@ -461,8 +507,7 @@ Reps: 25/10/5/5 — adding weight each set
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         Image.asset('assets/muscle24.jpg'),
-                        Text(
-                            """Execution
+                        Text("""Execution
 
 Attach your exercise bands very securely to a rack. Remember that the muscles in your legs are some of the largest and strongest in your body, so you’ll need higher resistance bands. 
 You’ll also need some dumbbell weights, which you’ll just hold in your hands. 
@@ -484,8 +529,7 @@ Reps: 10-12RM on each leg
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         Image.asset('assets/muscle21.jpg'),
-                        Text(
-                            """Execution
+                        Text("""Execution
 
 Keep your position from the previous exercise; however, you’ll need to ditch the weights. 
 To start, drop into a squat.
@@ -508,8 +552,7 @@ Reps: to failure on each leg
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         Image.asset('assets/muscle22.jpg'),
-                        Text(
-                            """Execution
+                        Text("""Execution
 
 Shoes off — you’ll only need to be in your socks for this exercise.
 Grab a dumbbell or weight, which you’ll hold with both hands, at the center of your chest. 
@@ -531,8 +574,7 @@ Reps: 10-12RM on each leg
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         Image.asset('assets/muscle23.jpg'),
-                        Text(
-                            """Execution
+                        Text("""Execution
 
 Set yourself up with your resistance band. Hook the bottom of the band under your feet, toes pointing straight out in front. The top of the band needs to hook around the outside of your upper arms. To do this, clasp your hands under your chin, holding the band and scoop the band out around your elbows, which should then be perpendicular to your body.
 Keeping the bands under your feet, take one step to the left. Then take one step to the right. 
@@ -553,14 +595,28 @@ Reps: Ladder to 10 reps
                       ]
                     : index == 3
                         ? [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 15),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_back_ios,
+                                      size: 3.h,
+                                    )),
+                              ),
+                            ),
                             Text(
                                 """ 1. Close Grip Bench Press :                                                       """,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
                             Image.asset('assets/muscle31.jpg'),
-                            Text(
-                                """Execution
+                            Text("""Execution
             
             Hold the barbell in an overhand grip, with your hands in line with your shoulders.
             Keep your elbows tight and forward — resist flaring them out.
@@ -580,8 +636,7 @@ Reps: Ladder to 10 reps
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
                             Image.asset('assets/muscle32.jpg'),
-                            Text(
-                                """Execution
+                            Text("""Execution
             
             Set yourself up at the dip station. You’ll need an appropriate weight to hang around your waist, as well as resistance bands you can use for the assisted dips.
             For the first set, hang the weight around your waist, or hold it between your knees, and dip until you reach failure.
@@ -602,8 +657,7 @@ Reps: Ladder to 10 reps
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
                             Image.asset('assets/muscle33.jpg'),
-                            Text(
-                                """Execution
+                            Text("""Execution
             
             Stand with your back to the cable machine and tilt your torso forward slightly, keeping your neck straight. Create a stable standing position by dropping one leg back behind the other.
             Hold the cables in both hands, above and behind your head, with your elbows tucked in next to your ears.
@@ -626,8 +680,7 @@ Reps: Ladder to 10 reps
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
                             Image.asset('assets/muscle34.jpg'),
-                            Text(
-                                """Execution
+                            Text("""Execution
             
             Stand facing the cable machine with one foot dropped behind the other. Your weight will be on your front foot, torso leaning forward slightly, and your toes extended on the back foot, but still bearing some weight. 
             Hold the cables at head height, keeping your elbows tucked in. 
@@ -649,8 +702,7 @@ Reps: Ladder to 10 reps
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
                             Image.asset('assets/muscle35.jpg'),
-                            Text(
-                                """Execution
+                            Text("""Execution
             
             Safely and securely attach the bands to something exceptionally heavy or attached to the floor. No-one wants to get smacked in the head with exercise bands at full stretch if they accidentally pop off. 
             Attach the other end of the bands to your chosen weights, again, making sure they’re secure.
@@ -666,14 +718,28 @@ Reps: Ladder to 10 reps
                           ]
                         : index == 4
                             ? [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 15),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
+                                    child: InkWell(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_back_ios,
+                                          size: 3.h,
+                                        )),
+                                  ),
+                                ),
                                 Text(
                                     """ 1. Horizontal Cable/Band Crossovers :                                                       """,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle41.png'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Stand with your back to the cable machine. Have your feet just wider than hip-width apart, torso straight and core engaged. The cables should be adjusted, so they’re pulling from just above shoulder height. 
             Hold the cables in both hands, with your arms extended out.
@@ -695,8 +761,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle42.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Lie down on your inclined bench, again ensuring you have good posture. Engage your core and glutes, keep your feet flat on the floor, and drive into the bench.
             Hold the dumbbells in an overhand grip.
@@ -719,8 +784,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle43.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Stand with your back to the cable machine. Have your feet just wider than hip-width apart, torso straight and core engaged. This time, the cables should be adjusted, so they’re pulling from the top of the machine. 
             Hold the cables in both hands.
@@ -744,8 +808,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle44.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Set yourself up on the floor. You’ll want your legs spread slightly, so your feet are just wider than hip-width. Your hands should press into the floor just outside shoulder width. Keep your body as straight as possible, and core engaged.
             Pushups from your toes are the best for maximizing your efforts. However, if you’re still pretty new, you can always do these pushups from your knees. 
@@ -767,8 +830,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle45.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Attach your resistance band to a weight rack or fixed pole. You’ll want it positioned roughly a foot off the ground. 
             Place yourself parallel to where you have your bands set up. The side you’re working should be closest to the bands. 
@@ -787,14 +849,28 @@ Reps: Ladder to 10 reps
             """),
                               ]
                             : [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 15),
+                                  child: Align(
+                                    alignment: Alignment.topLeft,
+                                    child: InkWell(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_back_ios,
+                                          size: 3.h,
+                                        )),
+                                  ),
+                                ),
                                 Text(
                                     """ 1. Warm Up — Band Shoulder Press :                                                       """,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle51.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Attach your resistance bands to your power rack at around chest height. Make sure they are secure.
             Keep your core engaged and torso slightly tilted back to make sure you’re not moving your arms behind your head.
@@ -816,8 +892,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle52.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Sit with your torso straight and feet flat on the floor. Engage your core and glutes.
             Start with the bar at the top of your chest, and push the bar straight up, fully extending your arms. 
@@ -841,8 +916,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle53.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Stand with a split stance. You’ll want the cable pulling across the front of your body, from the opposite side to the one you’re working.
             Tilt your torso forward at the hips, keeping your back straight and core engaged.
@@ -866,8 +940,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle54.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Stand with a split stance. However, this time, the cable should pull across the back of your body, from the opposite side to the one you’re working.
             Keep your torso straight and core engaged.
@@ -887,8 +960,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle55.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Stand with a split stance, with your back to the cable pully. This time this cable will be pulling alongside your body, on the arm you are working. 
             Keep your torso straight and core engaged.
@@ -910,8 +982,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle56.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Position yourself into an athletic stance. Your feet will be wider than hip-width apart, knees bent but shins vertical, hips moved back, torso tilted forward, and your chest up.
             Start with the weight in your hand, arm in front of your body, elbow slightly bent. 
@@ -936,8 +1007,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle57.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Keep your feet in the same position. However, you’ll want to straighten up from the athletic stance. 
             Shift the weight up to your shoulder.
@@ -960,8 +1030,7 @@ Reps: Ladder to 10 reps
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 Image.asset('assets/muscle58.jpg'),
-                                Text(
-                                    """Execution
+                                Text("""Execution
             
             Stand facing the cable machine, with the cable set up high. Your feet should be just wider than your hips, your torso straight, and as always, your core engaged. 
             Hold the cables in an overhand grip, and pull them back towards your face. Keep your elbows down next to your body, rather than up around your head. 

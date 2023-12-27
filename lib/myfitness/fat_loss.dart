@@ -13,6 +13,20 @@ class ScienceBehindLossWeight extends StatelessWidget {
       child: SingleChildScrollView(
           child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 30, left: 12),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 3.h,
+                  )),
+            ),
+          ),
           SizedBox(height: 2.h),
           Image.asset('assets/FATFIT.png', height: 50.h),
           Container(

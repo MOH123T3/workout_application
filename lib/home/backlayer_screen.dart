@@ -119,15 +119,21 @@ class _BackLayerState extends State<BackLayer> {
 
   getDays(String s, String t, int index) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        TextButton(
-          child: Text(
-            "$s :",
-            style: TextStyle(fontSize: 15.sp, color: Colors.black),
-          ),
-          onPressed: () {
+        Text(
+          "$s :",
+          style: TextStyle(
+              fontSize: 15.sp,
+              color: Colors.black,
+              fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          width: 10.w,
+        ),
+        InkWell(
+          onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -135,10 +141,10 @@ class _BackLayerState extends State<BackLayer> {
                           index: index,
                         )));
           },
-        ),
-        Image.asset(
-          t,
-          height: 8.h,
+          child: Image.asset(
+            t,
+            height: 8.h,
+          ),
         )
       ],
     );
